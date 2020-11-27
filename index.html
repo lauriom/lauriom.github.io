@@ -5,6 +5,9 @@
 <script>
 function onButtonClick() {
   let filters = [];
+  let options = {};
+  filters.push("ESP_LIGHTCNTR");
+  options.filters = filters;
 /*
   let filterService = document.querySelector('#service').value;
   if (filterService.startsWith('0x')) {
