@@ -1,5 +1,7 @@
 <html>
     <button type="button" onclick="onButtonClick()">Start</button>
+
+    <input type="color" id="html5colorpicker" onchange="clickColor(0, -1, -1, 5)" value="#ff0000" style="width:85%;">
 </html>
 
 <script>
@@ -8,7 +10,7 @@ function onButtonClick() {
   let options = {};
   filters.push("ESP_LIGHTCNTR");
   options.filters = filters;
-/*
+
   let filterService = document.querySelector('#service').value;
   if (filterService.startsWith('0x')) {
     filterService = parseInt(filterService);
@@ -33,11 +35,11 @@ function onButtonClick() {
   } else {
     options.filters = filters;
   }
-  */
-  console.log('Requesting Bluetooth Device...');
+  
+ 
   navigator.bluetooth.requestDevice(options)
   .then(device => {
-    console.log('> Name:             ' + device.name);
+    log('> Name:             ' + device.name);
     console.log('> Id:               ' + device.id);
     console.log('> Connected:        ' + device.gatt.connected);
   })
