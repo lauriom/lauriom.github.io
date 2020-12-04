@@ -1,51 +1,64 @@
-<html>
-    <button type="button" onclick="onButtonClick()">Start</button>
-
-    <input type="color" id="html5colorpicker" onchange="clickColor(0, -1, -1, 5)" value="#ff0000" style="width:85%;">
-</html>
-
 <script>
-function onButtonClick() {
-  let filters = [];
-  let options = {};
-  filters.push("ESP_LIGHTCNTR");
-  options.filters = filters;
-
-  let filterService = document.querySelector('#service').value;
-  if (filterService.startsWith('0x')) {
-    filterService = parseInt(filterService);
-  }
-  if (filterService) {
-    filters.push({services: [filterService]});
-  }
-
-  let filterName = document.querySelector('#name').value;
-  if (filterName) {
-    filters.push({name: filterName});
-  }
-
-  let filterNamePrefix = document.querySelector('#namePrefix').value;
-  if (filterNamePrefix) {
-    filters.push({namePrefix: filterNamePrefix});
-  }
-
-  let options = {};
-  if (document.querySelector('#allDevices').checked) {
-    options.acceptAllDevices = true;
-  } else {
-    options.filters = filters;
+  function onButtonClick() {
+    let filters = [];
+  
+    let filterService = document.querySelector('#service').value;
+    if (filterService.startsWith('0x')) {
+      filterService = parseInt(filterService);
+    }
+    if (filterService) {
+      filters.push({services: [filterService]});
+    }
+  
+    let filterName = document.querySelector('#name').value;
+    if (filterName) {
+      filters.push({name: filterName});
+    }
+  
+    let filterNamePrefix = document.querySelector('#namePrefix').value;
+    if (filterNamePrefix) {
+      filters.push({namePrefix: filterNamePrefix});
+    }
+  
+    let options = {};
+    if (document.querySelector('#allDevices').checked) {
+      options.acceptAllDevices = true;
+    } else {
+      options.filters = filters;
+    }
+    
+   
+    navigator.bluetooth.requestDevice(options)
+    .then(device => {
+      console.log('> Name:             ' + device.name);
+      console.log('> Id:               ' + device.id);
+      ('> Connected:        ' + device.gatt.connected);
+    })
+    .catch(error => {
+      console.log('Argh! ' + error);
+    });
   }
   
- 
-  navigator.bluetooth.requestDevice(options)
-  .then(device => {
-    log('> Name:             ' + device.name);
-    console.log('> Id:               ' + device.id);
-    console.log('> Connected:        ' + device.gatt.connected);
-  })
-  .catch(error => {
-    console.log('Argh! ' + error);
-  });
-}
+  </script>
 
-</script>
+  
+<html>
+    <button type="button" onclick="onButtonClick()">Start BLE</button>
+    <br>
+    <div id="IoButtons">
+        <div id="ColorIntensity">
+           
+            <input type="color" id="html5colorpicker" onchange="clickColor(0, -1, -1, 5)" value="#ff0000" style="width:80%;">
+            <br>
+            <div class="slidecontainer">
+                <input type="range" min="0" max="600" value="0" class="slider" id="myRange"style="width:80%;"">
+            </div>
+        </div>
+        <br>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label>
+    </dif>
+    </html>
+
