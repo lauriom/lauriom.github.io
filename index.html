@@ -1,8 +1,10 @@
 <script>
-  function onButtonClick() {
-  
+  function StartBLE() {
+    let filters = [];
     let options = {};
-    
+
+    filters.push({name: filterName});
+    options.filters = filters;
     options.acceptAllDevices = true;
    
     navigator.bluetooth.requestDevice(options)
@@ -20,7 +22,7 @@
 
   
 <html>
-    <button type="button" onclick="onButtonClick()">Start BLE</button>
+    <button type="button" onclick="StartBLE()">Start BLE</button>
     <br>
     <div id="IoButtons">
         <div id="ColorIntensity">
