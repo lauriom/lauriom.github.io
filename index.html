@@ -1,7 +1,11 @@
 <script>
   function onButtonClick() {
+  
+    let options = {};
     
-    navigator.bluetooth.requestDevice()
+    options.acceptAllDevices = true;
+   
+    navigator.bluetooth.requestDevice(options)
     .then(device => {
       console.log('> Name:             ' + device.name);
       console.log('> Id:               ' + device.id);
