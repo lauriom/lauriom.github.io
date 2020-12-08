@@ -3,8 +3,6 @@
     let filters = [];
     let options = {};
 
-    filters.push({name: filterName});
-    options.filters = filters;
     options.acceptAllDevices = true;
    
     navigator.bluetooth.requestDevice(options)
